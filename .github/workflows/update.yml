@@ -1,0 +1,27 @@
+name: Update Latest YouTube Video
+
+on:
+  schedule:
+    - cron: "0 1 * * *" # 每天 01:00 UTC 執行一次（台灣時間早上 9 點）
+  workflow_dispatch: # 也可以手動執行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm init -y
+      - run: npm install
+      - run: node latest.js
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      - name: Commit and push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add index.html
+          git commit -m "更新最新影片" || echo "No changes"
+          git push
