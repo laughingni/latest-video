@@ -1,7 +1,7 @@
 const fs = require("fs");
 const https = require("https");
 
-const channelId = "UC8UasQ9gkMK0wqTGkEVRblg"; // 你的頻道 ID
+const channelId = "UCTvnUjMtmzG_3uh8Ay11JLA"; // 你的頻道 ID
 const apiKey = process.env.YOUTUBE_API_KEY;
 
 const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=1&type=video`;
